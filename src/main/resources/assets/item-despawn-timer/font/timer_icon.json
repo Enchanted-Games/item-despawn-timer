@@ -1,0 +1,16 @@
+{
+  "providers": [
+    {
+      "type": "bitmap",
+      "file": "item-despawn-timer:timer.png",
+      "ascent": 8,
+      "chars": ["⌚"]
+    },
+    {
+      "type": "space",
+      "advances": {
+        "_": 1
+      }
+    }
+  ]
+}

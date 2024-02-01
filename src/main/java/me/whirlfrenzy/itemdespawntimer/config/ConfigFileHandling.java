@@ -6,7 +6,10 @@ import java.nio.file.Path;
 import java.util.Properties;
 
 import me.whirlfrenzy.itemdespawntimer.ItemDespawnTimerClient;
+import me.whirlfrenzy.itemdespawntimer.util.Conversions;
 import net.fabricmc.loader.api.FabricLoader;
+
+
 
 public class ConfigFileHandling {
     public static final String DEBUG = "debug_mode";
@@ -26,10 +29,36 @@ public class ConfigFileHandling {
     
     public static void writeProperties(Properties p) {
         p.setProperty(DEBUG, Boolean.toString(ConfigValues.debug));
+        p.setProperty(LABEL_RENDER_DISTANCE, Integer.toString(ConfigValues.label_renderDistance));
+        p.setProperty(LABEL_ONLY_VISIBLE_ON_SNEAK, Boolean.toString(ConfigValues.label_onlyVisibleWhenSneaking));
+        p.setProperty(ICON_COLOUR, Conversions.decimalToHexColour(ConfigValues.icon_defaultColour));
+        p.setProperty(ICON_ALIGNMENT, Conversions.boolToString(ConfigValues.icon_onRightSide, "right","left"));
+        p.setProperty(TIMER_MAX_AMOUNT, Integer.toString(ConfigValues.timer_maxAmountToShow));
+        p.setProperty(TIMER_DEFAULT_COLOUR, Conversions.decimalToHexColour(ConfigValues.timer_defaultColour));
+        p.setProperty(TIMER_COLOUR_BASED_ON_TIME_LEFT, Boolean.toString(ConfigValues.timer_colourBasedOnTimeLeft));
+        p.setProperty(TIMER_WARNING_THRESHOLD, Integer.toString(ConfigValues.timer_warningThreshold));
+        p.setProperty(TIMER_WARNING_COLOUR, Conversions.decimalToHexColour(ConfigValues.timer_warningColour));
+        p.setProperty(TIMER_DANGER_THRESHOLD, Integer.toString(ConfigValues.timer_dangerThreshold));
+        p.setProperty(TIMER_DANGER_COLOUR, Conversions.decimalToHexColour(ConfigValues.timer_dangerColour));
+        p.setProperty(TIMER_CRITICAL_THRESHOLD, Integer.toString(ConfigValues.timer_criticalThreshold));
+        p.setProperty(TIMER_CRITICAL_COLOUR, Conversions.decimalToHexColour(ConfigValues.timer_criticalColour));
     }
 
     public static void setConfigFromProperties(Properties p) {
-        ConfigValues.debug = p.getProperty(DEBUG).toLowerCase().equals("true") ? true : false;
+        ConfigValues.debug = Conversions.stringToBool(p.getProperty(DEBUG));
+        ConfigValues.label_renderDistance = Conversions.defaultedStringToInt(p.getProperty(LABEL_RENDER_DISTANCE), ConfigValues.label_renderDistance);
+        ConfigValues.label_onlyVisibleWhenSneaking = Conversions.stringToBool(p.getProperty(LABEL_ONLY_VISIBLE_ON_SNEAK));
+        ConfigValues.icon_defaultColour = Conversions.hexColourToDecimal(p.getProperty(ICON_COLOUR));
+        ConfigValues.icon_onRightSide = Conversions.stringToBool(p.getProperty(ICON_ALIGNMENT), "right", "left", false);
+        ConfigValues.timer_maxAmountToShow = Conversions.defaultedStringToInt(p.getProperty(TIMER_MAX_AMOUNT), ConfigValues.timer_maxAmountToShow);
+        ConfigValues.timer_defaultColour = Conversions.hexColourToDecimal(p.getProperty(TIMER_DEFAULT_COLOUR));
+        ConfigValues.timer_colourBasedOnTimeLeft = Conversions.stringToBool(p.getProperty(TIMER_COLOUR_BASED_ON_TIME_LEFT));
+        ConfigValues.timer_warningThreshold = Conversions.defaultedStringToInt(p.getProperty(TIMER_WARNING_THRESHOLD), ConfigValues.timer_warningThreshold);
+        ConfigValues.timer_warningColour = Conversions.hexColourToDecimal(p.getProperty(TIMER_WARNING_COLOUR));
+        ConfigValues.timer_dangerThreshold = Conversions.defaultedStringToInt(p.getProperty(TIMER_DANGER_THRESHOLD), ConfigValues.timer_dangerThreshold);
+        ConfigValues.timer_dangerColour = Conversions.hexColourToDecimal(p.getProperty(TIMER_DANGER_COLOUR));
+        ConfigValues.timer_criticalThreshold = Conversions.defaultedStringToInt(p.getProperty(TIMER_CRITICAL_THRESHOLD), ConfigValues.timer_criticalThreshold);
+        ConfigValues.timer_criticalColour = Conversions.hexColourToDecimal(p.getProperty(TIMER_CRITICAL_COLOUR));
     }
 
     public static void saveConfig() {

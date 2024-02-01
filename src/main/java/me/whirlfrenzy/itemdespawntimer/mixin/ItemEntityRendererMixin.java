@@ -54,18 +54,18 @@ public abstract class ItemEntityRendererMixin extends EntityRenderer<ItemEntity>
 
     @Inject(at = @At(value = "TAIL"), method = "render(Lnet/minecraft/entity/ItemEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V")
     public void renderTimerText(ItemEntity itemEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
-        if(!((ItemEntityAccessInterface)itemEntity).item_despawn_timer$getTimerLabelVisibility()){
+        if( MinecraftClient.getInstance().options.hudHidden || !((ItemEntityAccessInterface)itemEntity).item_despawn_timer$getTimerLabelVisibility() ){
+            return;
+        }
+
+        // dont render label if sneak key isnt pressed and config is onlyVisibleWhenSneaking
+        if( ConfigValues.label_onlyVisibleWhenSneaking && !sneakKeyBinding.isPressed() ) {
             return;
         }
 
         // dont render label if more than configured amount of blocks away
         double squaredDistance = this.dispatcher.getSquaredDistanceToCamera(itemEntity);
         if( squaredDistance > ConfigValues.label_renderDistance * ConfigValues.label_renderDistance ) {
-            return;
-        }
-
-        // dont render label if sneak key isnt pressed and config is onlyVisibleWhenSneaking
-        if( ConfigValues.label_onlyVisibleWhenSneaking && !sneakKeyBinding.isPressed() ) {
             return;
         }
         

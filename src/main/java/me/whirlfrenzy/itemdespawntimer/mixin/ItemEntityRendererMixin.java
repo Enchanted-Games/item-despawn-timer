@@ -72,7 +72,7 @@ public abstract class ItemEntityRendererMixin extends EntityRenderer<ItemEntity>
         int modItemAge = ((ItemEntityAccessInterface)itemEntity).item_despawn_timer$getModItemAge();
         int itemAgeInSeconds = Math.max(0, ((int)Math.ceil(((float) 6000 - (float) modItemAge) / 20)) - 1);
 
-        // dont render label if
+        // dont render label if item age is bigger than max time
         if( itemAgeInSeconds > ConfigValues.timer_maxAmountToShow && ConfigValues.timer_maxAmountToShow > 0) {
             return;
         }
@@ -87,7 +87,7 @@ public abstract class ItemEntityRendererMixin extends EntityRenderer<ItemEntity>
         // time until despawn text
         Text ageText;
         Style ageStyle = Style.EMPTY.withColor(TextColor.fromRgb( getTimerColour(itemAgeInSeconds) ));
-        if (modItemAge < 0) {
+        if (modItemAge == -32768) {
             ageText = Text.literal( getIconSpacing(false) + "∞" + getIconSpacing(true) ).setStyle(ageStyle);
         } else {
             ageText = Text.literal( getIconSpacing(false) + formatTimer(itemAgeInSeconds) + getIconSpacing(true) ).setStyle(ageStyle);

@@ -11,7 +11,7 @@ import net.minecraft.text.Text;
 
 public class ModConfig {
 	public void save() { /* save your config! */ }
-    
+    // https://github.com/isXander/Controlify/blob/update/1.20.3/src/main/java/dev/isxander/controlify/gui/screen/GlobalSettingsScreenFactory.java
     public static Screen createGui(Screen parent) {
         return YetAnotherConfigLib.createBuilder()
         .title(Text.of("Used for narration. Could be used to render a title in the future."))

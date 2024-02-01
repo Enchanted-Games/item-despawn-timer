@@ -85,7 +85,7 @@ public abstract class ItemEntityMixin extends EntityMixin implements ItemEntityA
             }
 
             previousTickItemAge = this.getItemAge();
-        } else {
+        } else if(this.modItemAge != -32768) {
             ++this.modItemAge;
         }
     }

@@ -1,23 +1,25 @@
 package me.whirlfrenzy.itemdespawntimer.config;
 
 public class ConfigValues {
-	// Default config values
+	// Live config values
 	// These variables are changed when a config file is loaded / when config is edited via YACL.
-  public static boolean debug = false;
+	// Read from here to get the current user config values
+	public static int label_renderDistance = DefaultConfigValues.label_renderDistance;
+	public static boolean label_onlyVisibleWhenSneaking = DefaultConfigValues.label_onlyVisibleWhenSneaking;
 
-	public static int label_renderDistance = 4;
-	public static boolean label_onlyVisibleWhenSneaking = false;
+	public static int icon_defaultColour = DefaultConfigValues.icon_defaultColour;
+	public static boolean icon_onRightSide = DefaultConfigValues.icon_onRightSide;
 
-	public static int icon_defaultColour = 0xffffff;
-	public static boolean icon_onRightSide = false;
+	public static int timer_maxAmountToShow = DefaultConfigValues.timer_maxAmountToShow;
+	public static int timer_defaultColour = DefaultConfigValues.timer_defaultColour;
+	public static boolean timer_colourBasedOnTimeLeft = DefaultConfigValues.timer_colourBasedOnTimeLeft;
+	public static int timer_warningThreshold = DefaultConfigValues.timer_warningThreshold;
+	public static int timer_warningColour = DefaultConfigValues.timer_warningColour;
+	public static int timer_dangerThreshold = DefaultConfigValues.timer_dangerThreshold;
+	public static int timer_dangerColour = DefaultConfigValues.timer_dangerColour;
+	public static int timer_criticalThreshold = DefaultConfigValues.timer_criticalThreshold;
+	public static int timer_criticalColour = DefaultConfigValues.timer_criticalColour;
 
-	public static int timer_maxAmountToShow = 0;
-	public static int timer_defaultColour = 0xffffff;
-	public static boolean timer_colourBasedOnTimeLeft = true;
-	public static int timer_warningThreshold = 60;
-	public static int timer_warningColour = 0xffed69;
-	public static int timer_dangerThreshold = 20;
-	public static int timer_dangerColour = 0xffb469;
-	public static int timer_criticalThreshold = 10;
-	public static int timer_criticalColour = 0xff5454;
+  public static boolean debug = DefaultConfigValues.debug;
+	public static boolean fixes_useSeeThroughTextLayer = DefaultConfigValues.fixes_useSeeThroughTextLayer;
 }

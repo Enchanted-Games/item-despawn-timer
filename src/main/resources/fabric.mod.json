@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "id": "item-despawn-timer",
+  "id": "configurable-item-timer",
   "version": "${version}",
   "name": "Item Despawn Timer",
-  "description": "Informs you about the remainder of an item's lifespan",
-  "authors": ["whirlfrenzy"],
+  "description": "Informs you about the remainder of an item's lifespan\n\nAuthours:\n Enchanted_Games - Config menu and other changes\n whirlfrenzy - Original mod and networking",
+  "authors": ["Enchanted_Games", "whirlfrenzy"],
   "contact": {
     "sources": "https://github.com/whirlfrenzy/item-despawn-timer",
     "issues": "https://github.com/whirlfrenzy/item-despawn-timer/issues"
   },
   "license": "MIT",
-  "icon": "assets/item-despawn-timer/clock.png",
+  "icon": "assets/configurable-item-timer/textures/timer.png",
   "environment": "*",
   "entrypoints": {
     "main": ["me.whirlfrenzy.itemdespawntimer.ItemDespawnTimer"],
@@ -24,9 +24,7 @@
     "fabricloader": ">=0.15.3",
     "minecraft": ">=1.19.4",
     "java": ">=17",
-    "fabric-api": "*"
-  },
-  "dependencies": {
+    "fabric-api": "*",
     "yet_another_config_lib_v3": "*"
   }
 }

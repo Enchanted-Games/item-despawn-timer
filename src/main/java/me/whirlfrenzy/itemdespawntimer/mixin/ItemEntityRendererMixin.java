@@ -12,6 +12,7 @@ import net.minecraft.client.render.entity.EntityRendererFactory.Context;
 import net.minecraft.client.render.entity.ItemEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.item.Item;
 import net.minecraft.text.OrderedText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
@@ -65,8 +66,10 @@ public abstract class ItemEntityRendererMixin extends EntityRenderer<ItemEntity>
 
         // dont render label if more than configured amount of blocks away
         double squaredDistance = this.dispatcher.getSquaredDistanceToCamera(itemEntity);
-        if( squaredDistance > ConfigValues.label_renderDistance * ConfigValues.label_renderDistance ) {
-            return;
+        if( ConfigValues.label_renderDistance >= 1 ) {
+            if(squaredDistance > ConfigValues.label_renderDistance * ConfigValues.label_renderDistance){
+                return;
+            }
         }
         
         int modItemAge = ((ItemEntityAccessInterface)itemEntity).item_despawn_timer$getModItemAge();
@@ -80,7 +83,7 @@ public abstract class ItemEntityRendererMixin extends EntityRenderer<ItemEntity>
         // clock icon
         Text iconText;
         Style iconStyle = Style.EMPTY
-            .withFont(new Identifier("item-despawn-timer", "timer_icon"))
+            .withFont(new Identifier(ItemDespawnTimerClient.MOD_ID, "timer_icon"))
             .withColor(TextColor.fromRgb( ConfigValues.icon_defaultColour ));
         iconText = Text.literal("⌚").setStyle(iconStyle);
 
@@ -97,7 +100,7 @@ public abstract class ItemEntityRendererMixin extends EntityRenderer<ItemEntity>
         matrixStack.push();
         matrixStack.translate(0.0F, itemEntity.getHeight() + 0.75f, 0.0);
         matrixStack.multiply(((EntityRendererAccessor)this).getDispatcher().getRotation());
-        matrixStack.scale(-0.025f, -0.025f, -0.025f);
+        matrixStack.scale(-0.025f, -0.025f, 0.025f);
 
         Matrix4f matrix4f = matrixStack.peek().getPositionMatrix();
         matrix4f.translate(new Vector3f(4.0F, 0.0F, 0.0F));
@@ -112,21 +115,20 @@ public abstract class ItemEntityRendererMixin extends EntityRenderer<ItemEntity>
         int textWidth = textRenderer.getWidth(finalText);
         float halfTextWidth = (float) textWidth / 2;
 
-        // draw background
         float textBackgroundOpacity = MinecraftClient.getInstance().options.getTextBackgroundOpacity(0.25f);
         int j = (int)(textBackgroundOpacity * 255.0f) << 24;
 
+        // draw background
         String backgroundStr = "_".repeat(textWidth);
         Text backgroundText = Text.literal(backgroundStr).setStyle(iconStyle);
-
-        textRenderer.draw(backgroundText, -4 - halfTextWidth, -4f, -1, false, matrix4f, vertexConsumerProvider, TextRenderer.TextLayerType.SEE_THROUGH, j, i);
+        textRenderer.draw(backgroundText, -4 - halfTextWidth, -4f, -1, false, matrix4f, vertexConsumerProvider, ConfigValues.fixes_useSeeThroughTextLayer ? TextRenderer.TextLayerType.SEE_THROUGH : TextRenderer.TextLayerType.NORMAL, j, i);
 
         // draw timer text
         textRenderer.draw(finalText, -4 - halfTextWidth, -4f, -1, false, matrix4f, vertexConsumerProvider, TextRenderer.TextLayerType.NORMAL, 0, i);
 
         if(ConfigValues.debug) {
-            textRenderer.draw(Text.literal("item age: "    + modItemAge      ), -20, 12f, -1, false, matrix4f, vertexConsumerProvider, TextRenderer.TextLayerType.NORMAL, 0, i);
-            textRenderer.draw(Text.literal("item age (s): "+ itemAgeInSeconds), -20, 20f, -1, false, matrix4f, vertexConsumerProvider, TextRenderer.TextLayerType.NORMAL, 0, i);
+            textRenderer.draw(Text.literal("item age: "    + modItemAge      ), -50, 12f, -1, false, matrix4f, vertexConsumerProvider, TextRenderer.TextLayerType.NORMAL, 0, i);
+            textRenderer.draw(Text.literal("seconds until despawn: "+ itemAgeInSeconds), -50, 20f, -1, false, matrix4f, vertexConsumerProvider, TextRenderer.TextLayerType.NORMAL, 0, i);
         } 
 
         matrixStack.pop();

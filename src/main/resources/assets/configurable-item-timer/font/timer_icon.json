@@ -2,7 +2,7 @@
   "providers": [
     {
       "type": "bitmap",
-      "file": "item-despawn-timer:timer.png",
+      "file": "configurable-item-timer:timer.png",
       "ascent": 8,
       "chars": ["⌚"]
     },

@@ -7,9 +7,11 @@ import me.whirlfrenzy.itemdespawntimer.config.ConfigFileHandling;
 import me.whirlfrenzy.itemdespawntimer.networking.PacketReceiver;
 import net.fabricmc.api.ClientModInitializer;
 
+import java.awt.Color;
+
 public class ItemDespawnTimerClient implements ClientModInitializer {
     public static final String CONFIG_FILE_NAME = "configurable_item_timers.properties";
-    public static String MOD_ID = "item-despawn-timer";
+    public static String MOD_ID = "configurable-item-timer";
 
     public static final Logger log = LogManager.getLogger(MOD_ID);
 
@@ -18,5 +20,6 @@ public class ItemDespawnTimerClient implements ClientModInitializer {
         PacketReceiver.initialize();
         ConfigFileHandling.loadConfig();
         ConfigFileHandling.saveConfig();
+
     }
 }

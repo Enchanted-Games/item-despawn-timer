@@ -6,8 +6,14 @@ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.entry.RegistryEntry.Reference;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Identifier;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -20,6 +26,7 @@ import java.util.ArrayList;
 @Mixin(ItemEntity.class)
 public abstract class ItemEntityMixin extends EntityMixin implements ItemEntityAccessInterface {
     @Shadow public abstract int getItemAge();
+    @Shadow public abstract ItemStack getStack();
 
     @Shadow private int itemAge;
     @Unique
@@ -37,7 +44,7 @@ public abstract class ItemEntityMixin extends EntityMixin implements ItemEntityA
     int modItemAge = 0;
     @Unique
     ArrayList<ServerPlayerEntity> playersInRange = new ArrayList<>();
-
+    
     @Override
     public boolean item_despawn_timer$getTimerLabelVisibility() {
         return this.timerLabelVisibility;
@@ -75,6 +82,9 @@ public abstract class ItemEntityMixin extends EntityMixin implements ItemEntityA
         playersInRange.remove(player);
     }
 
+    @Unique
+    boolean configurableItemTimers_checkedIfItemShouldHaveNoLabel;
+
     @Inject(method = "tick", at = @At("TAIL"))
     public void tick(CallbackInfo ci) {
         if(!this.getWorld().isClient()) {
@@ -87,6 +97,17 @@ public abstract class ItemEntityMixin extends EntityMixin implements ItemEntityA
             previousTickItemAge = this.getItemAge();
         } else if(this.modItemAge != -32768) {
             ++this.modItemAge;
+        }
+
+        if(!configurableItemTimers_checkedIfItemShouldHaveNoLabel) {
+            Reference<Item> itemRef = Registries.ITEM.getEntry( Item.getRawId( this.getStack().getItem() ) ).get();
+            Identifier itemResourceLocation = itemRef.getKey().get().getValue();
+
+            if( itemResourceLocation.toString().equals("minecraft:ice") ) {
+                item_despawn_timer$setTimerLabelVisibility(false);
+            }
+
+            configurableItemTimers_checkedIfItemShouldHaveNoLabel = true;
         }
     }
 }

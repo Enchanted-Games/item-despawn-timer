@@ -43,9 +43,6 @@ dependencies {
 
 	// Mod Menu
 	modApi "com.terraformersmc:modmenu:${project.mod_menu_version}"
-
-	// other
-	implementation group: 'nu.studer', name: 'java-ordered-properties', version: '1.0.4'
 }
 
 processResources {

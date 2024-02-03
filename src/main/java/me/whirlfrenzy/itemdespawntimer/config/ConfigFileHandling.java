@@ -3,7 +3,7 @@ package me.whirlfrenzy.itemdespawntimer.config;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import nu.studer.java.util.OrderedProperties;
+import me.whirlfrenzy.itemdespawntimer.libs.nu.studer.OrderedProperties;
 
 import me.whirlfrenzy.itemdespawntimer.ItemDespawnTimerClient;
 import me.whirlfrenzy.itemdespawntimer.util.Conversions;

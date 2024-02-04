@@ -1,0 +1,47 @@
+{
+  "configurable_item_timers.values.right": "Right",
+  "configurable_item_timers.values.left": "Left",
+
+  "configurable_item_timers.config.title": "Configurable Item Timers Config",
+
+  "configurable_item_timers.config.category.options": "Main Options",
+
+  "configurable_item_timers.config.group.general": "Label Settings",
+  "configurable_item_timers.config.group.general.option.label_render_distance": "Label Render Distance",
+  "configurable_item_timers.config.group.general.option.label_render_distance.desc": "Render Distance in blocks for the timer label. Settings this to 0 will make the label use the regular entity render distance",
+  "configurable_item_timers.config.group.general.option.only_visible_while_sneaking": "Only Visible When Sneaking",
+  "configurable_item_timers.config.group.general.option.only_visible_while_sneaking.desc": "Makes the timer label only render while you are sneaking",
+
+  "configurable_item_timers.config.group.timer_display": "Timer Settings",
+  "configurable_item_timers.config.group.timer_display.option.max_amount": "Maximum Time To Display",
+  "configurable_item_timers.config.group.timer_display.option.max_amount.desc": "Maximum amount of seconds the timer will display. The label won't render if the timer is displaying more than this amount",
+  "configurable_item_timers.config.group.timer_display.option.timer_default_colour": "Timer Colour",
+  "configurable_item_timers.config.group.timer_display.option.timer_default_colour.desc": "Colour of the timer. This can be overridden if 'Colour Depends on Time Remaining' is enabled",
+  "configurable_item_timers.config.group.timer_display.option.colour_based_on_time_left": "Colour Depends on Time Remaining",
+  "configurable_item_timers.config.group.timer_display.option.colour_based_on_time_left.desc": "When enabled, the timer will change colour based on the time until the item despawns. The colours and time thresholds are configurable below",
+  "configurable_item_timers.config.group.timer_display.label.colour_overrides": "\u00A77The settings below only apply when 'Colour Depends on Time Remaining' is turned on",
+  "configurable_item_timers.config.group.timer_display.option.warning_threshold": "Warning Threshold",
+  "configurable_item_timers.config.group.timer_display.option.warning_threshold.desc": "Time in seconds where the Warning Colour will be used",
+  "configurable_item_timers.config.group.timer_display.option.warning_colour": "Warning Colour",
+  "configurable_item_timers.config.group.timer_display.option.warning_colour.desc": "",
+  "configurable_item_timers.config.group.timer_display.option.danger_threshold": "Danger Threshold",
+  "configurable_item_timers.config.group.timer_display.option.danger_threshold.desc": "Time in seconds where the Danger Colour will be used",
+  "configurable_item_timers.config.group.timer_display.option.danger_colour": "Danger Colour",
+  "configurable_item_timers.config.group.timer_display.option.danger_colour.desc": "",
+  "configurable_item_timers.config.group.timer_display.option.critical_threshold": "Critical Threshold",
+  "configurable_item_timers.config.group.timer_display.option.critical_threshold.desc": "Time in seconds where the Critical Colour will be used",
+  "configurable_item_timers.config.group.timer_display.option.critical_colour": "Critical Colour",
+  "configurable_item_timers.config.group.timer_display.option.critical_colour.desc": "",
+
+  "configurable_item_timers.config.group.icon_display": "Icon Settings",
+  "configurable_item_timers.config.group.icon_display.option.icon_alignment": "Icon Alignment",
+  "configurable_item_timers.config.group.icon_display.option.icon_alignment.desc": "Where to align the timer icon",
+  "configurable_item_timers.config.group.icon_display.option.icon_colour": "Icon Colour",
+  "configurable_item_timers.config.group.icon_display.option.icon_colour.desc": "Colour of the timer icon",
+
+  "configurable_item_timers.config.category.fixes": "Fixes",
+  "configurable_item_timers.config.group.fixes.option.use_see_through_layer": "Use TextLayerType.SEE_THROUGH",
+  "configurable_item_timers.config.group.fixes.option.use_see_through_layer.desc": "Uses a different text layer when rendering the label background. This can fix entities and translucent blocks not appearing behind the label. However, the label background will be visible through solid blocks",
+  "configurable_item_timers.config.group.fixes.option.debug": "Enable Debug Mode",
+  "configurable_item_timers.config.group.fixes.option.debug.desc": "Displays extra information about ItemEntity"
+}

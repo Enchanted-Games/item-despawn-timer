@@ -18,6 +18,5 @@ public class ItemDespawnTimerClient implements ClientModInitializer {
         PacketReceiver.initialize();
         ConfigFileHandling.loadConfig();
         ConfigFileHandling.saveConfig();
-
     }
 }

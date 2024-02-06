@@ -150,6 +150,13 @@ public class YACLConfigBuilder {
                         .binding( DefaultConfigValues.fixes_useSeeThroughTextLayer, () -> ConfigValues.fixes_useSeeThroughTextLayer, (newVal) -> ConfigValues.fixes_useSeeThroughTextLayer = newVal )
                         .controller( opt -> BooleanControllerBuilder.create(opt).yesNoFormatter().coloured(true) )
                     .build())
+                    // use see though render layer for background
+                    .option( Option.<Boolean>createBuilder()
+                        .name( Text.translatableWithFallback("configurable_item_timers.config.group.fixes.option.show_entity_culling_warning", "show EntityCulling warning") )
+                        .description( OptionDescription.of( Text.translatableWithFallback("configurable_item_timers.config.group.fixes.option.show_entity_culling_warning.desc", "shows a warning about timer desync in the log when EntityCulling is installed") ) )
+                        .binding( DefaultConfigValues.fixes_showEntityCullingWarning, () -> ConfigValues.fixes_showEntityCullingWarning, (newVal) -> ConfigValues.fixes_useSeeThroughTextLayer = newVal )
+                        .controller( opt -> BooleanControllerBuilder.create(opt).yesNoFormatter().coloured(true) )
+                    .build())
                     // debug mode
                     .option( Option.<Boolean>createBuilder()
                         .name( Text.translatableWithFallback("configurable_item_timers.config.group.fixes.option.debug", "enable debug mode") )

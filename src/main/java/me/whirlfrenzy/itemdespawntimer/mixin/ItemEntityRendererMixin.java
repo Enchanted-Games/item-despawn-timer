@@ -12,7 +12,6 @@ import net.minecraft.client.render.entity.EntityRendererFactory.Context;
 import net.minecraft.client.render.entity.ItemEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.ItemEntity;
-import net.minecraft.item.Item;
 import net.minecraft.text.OrderedText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
@@ -55,7 +54,11 @@ public abstract class ItemEntityRendererMixin extends EntityRenderer<ItemEntity>
 
     @Inject(at = @At(value = "TAIL"), method = "render(Lnet/minecraft/entity/ItemEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V")
     public void renderTimerText(ItemEntity itemEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
-        if( MinecraftClient.getInstance().options.hudHidden || !((ItemEntityAccessInterface)itemEntity).item_despawn_timer$getTimerLabelVisibility() ){
+        MinecraftClient client = MinecraftClient.getInstance();
+        boolean isHudHidden = client.options.hudHidden;
+        float textBackgroundOpacity = client.options.getTextBackgroundOpacity(0.25f);
+
+        if( isHudHidden || !((ItemEntityAccessInterface)itemEntity).item_despawn_timer$getTimerLabelVisibility() ){
             return;
         }
 
@@ -115,7 +118,6 @@ public abstract class ItemEntityRendererMixin extends EntityRenderer<ItemEntity>
         int textWidth = textRenderer.getWidth(finalText);
         float halfTextWidth = (float) textWidth / 2;
 
-        float textBackgroundOpacity = MinecraftClient.getInstance().options.getTextBackgroundOpacity(0.25f);
         int j = (int)(textBackgroundOpacity * 255.0f) << 24;
 
         // draw background
@@ -127,8 +129,8 @@ public abstract class ItemEntityRendererMixin extends EntityRenderer<ItemEntity>
         textRenderer.draw(finalText, -4 - halfTextWidth, -4f, -1, false, matrix4f, vertexConsumerProvider, TextRenderer.TextLayerType.NORMAL, 0, i);
 
         if(ConfigValues.debug) {
-            textRenderer.draw(Text.literal("item age: "    + modItemAge      ), -50, 12f, -1, false, matrix4f, vertexConsumerProvider, TextRenderer.TextLayerType.NORMAL, 0, i);
-            textRenderer.draw(Text.literal("seconds until despawn: "+ itemAgeInSeconds), -50, 20f, -1, false, matrix4f, vertexConsumerProvider, TextRenderer.TextLayerType.NORMAL, 0, i);
+            textRenderer.draw(Text.literal("item age: "    + modItemAge      ), -50, 12f, -1, false, matrix4f, vertexConsumerProvider, TextRenderer.TextLayerType.SEE_THROUGH, 0, i);
+            textRenderer.draw(Text.literal("seconds until despawn: "+ itemAgeInSeconds), -50, 20f, -1, false, matrix4f, vertexConsumerProvider, TextRenderer.TextLayerType.SEE_THROUGH, 0, i);
         } 
 
         matrixStack.pop();

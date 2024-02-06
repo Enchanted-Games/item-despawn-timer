@@ -22,4 +22,5 @@ public class ConfigValues {
 
   public static boolean debug = DefaultConfigValues.debug;
 	public static boolean fixes_useSeeThroughTextLayer = DefaultConfigValues.fixes_useSeeThroughTextLayer;
+	public static boolean fixes_showEntityCullingWarning = DefaultConfigValues.fixes_showEntityCullingWarning;
 }

@@ -20,4 +20,5 @@ public class DefaultConfigValues {
 	
   public static final boolean debug = false;
 	public static boolean fixes_useSeeThroughTextLayer = false;
+	public static boolean fixes_showEntityCullingWarning = true;
 }

@@ -25,6 +25,7 @@ public class ConfigFileHandling {
     public static final String TIMER_CRITICAL_COLOUR = "timer__critical_colour";
     public static final String DEBUG = "debug_mode";
     public static final String TEXT_SEE_THROUGH_LAYER = "fixes__use_see_through_layer";
+    public static final String ENTITYCULLING_WARNING = "show_entity_culling_warning";
     
     private static void writeProperties(OrderedProperties p) {
         p.setProperty(LABEL_RENDER_DISTANCE, Integer.toString(ConfigValues.label_renderDistance));
@@ -42,6 +43,7 @@ public class ConfigFileHandling {
         p.setProperty(TIMER_CRITICAL_COLOUR, Conversions.decimalToHexColour(ConfigValues.timer_criticalColour));
         p.setProperty(DEBUG, Boolean.toString(ConfigValues.debug));
         p.setProperty(TEXT_SEE_THROUGH_LAYER, Boolean.toString(ConfigValues.fixes_useSeeThroughTextLayer));
+        p.setProperty(ENTITYCULLING_WARNING, Boolean.toString(ConfigValues.fixes_showEntityCullingWarning));
     }
 
     private static void setConfigFromProperties(OrderedProperties p) {
@@ -80,6 +82,7 @@ public class ConfigFileHandling {
         }
         ConfigValues.debug = Conversions.stringToBool(getProperty(p, DEBUG));
         ConfigValues.fixes_useSeeThroughTextLayer = Conversions.stringToBool(getProperty(p, TEXT_SEE_THROUGH_LAYER));
+        ConfigValues.fixes_showEntityCullingWarning = Conversions.stringToBool(getProperty(p, ENTITYCULLING_WARNING));
     }
 
     public static void saveConfig() {
